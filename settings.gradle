@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='ApplicationArchiAndoid'
+rootProject.name='My Application'
