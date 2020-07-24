@@ -3,10 +3,7 @@ package com.tech.myapplication.interactor
 import com.tech.myapplication.presenter.MyPresenter
 import com.tech.myapplication.repository.MyRepository
 
-class MyInteractor(
-    val repository : MyRepository,
-    val presenter : MyPresenter
-) {
+class MyInteractor(val repository : MyRepository, val presenter : MyPresenter) {
 
     fun getProducts() {
         val products = repository.getProducts()
