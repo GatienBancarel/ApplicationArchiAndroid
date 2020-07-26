@@ -1,3 +1,3 @@
 package com.tech.myapplication.interactor
 
-class ChuckNorris (val value: String)
+data class ChuckNorris (val value: String)

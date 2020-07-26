@@ -1,13 +1,21 @@
 package com.tech.myapplication.controller
 
 import com.tech.myapplication.interactor.MyInteractor
-
+interface MyControllerInterface {
+    fun onCreate()
+}
 class MyController(val interactor: MyInteractor) {
 
     fun onCreate() {
-        // Passer au background thread
+        interactor.getJoke()
+    }
+}
+
+class MyControllerDecorator(val controller: MyController): MyControllerInterface{
+    override fun onCreate() {
         Thread {
-            interactor.getProducts()
+            controller.onCreate()
         }.start()
     }
+
 }

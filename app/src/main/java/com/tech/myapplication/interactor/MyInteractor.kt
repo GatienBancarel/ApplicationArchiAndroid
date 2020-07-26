@@ -5,9 +5,9 @@ import com.tech.myapplication.repository.MyRepository
 
 class MyInteractor(val repository : MyRepository, val presenter : MyPresenter) {
 
-    fun getProducts() {
-        val products = repository.getProducts()
-        products.filter { it.price < 500 }
-        presenter.present(products)
+    fun getJoke() {
+        val joke = repository.getJoke()
+        //products.filter { it.price < 500 }
+        presenter.present(joke)
     }
 }
