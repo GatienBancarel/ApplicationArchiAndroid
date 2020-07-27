@@ -1,21 +1,15 @@
 package com.tech.myapplication.repository
 
-import android.util.Log
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tech.myapplication.interactor.ChuckNorris
-import com.tech.myapplication.interactor.Product
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
-import java.io.IOException
-import java.lang.Exception
+import javax.inject.Inject
 
-
-class MyRepository {
-    // Appel réseau avec OKHttp (library)
-    val client = OkHttpClient()
+class MyRepository @Inject constructor(
+    val client: OkHttpClient // Appel réseau avec OKHttp (library)
+) {
 
     fun getJoke() : ChuckNorris {
         val request = Request.Builder()
@@ -32,8 +26,5 @@ class MyRepository {
         } else {
             throw CannotDecodeJsonException("adapter from json à échoué")
         }
-
-        //return chuckNorrisEntityJSON.map { ChuckNorris(it.value) }
-
     }
 }

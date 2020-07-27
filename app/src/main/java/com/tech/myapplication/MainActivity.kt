@@ -2,30 +2,25 @@ package com.tech.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.tech.myapplication.controller.MyController
+import androidx.lifecycle.*
 import com.tech.myapplication.controller.MyControllerDecorator
-import com.tech.myapplication.interactor.MyInteractor
-import com.tech.myapplication.presenter.ChuckNorrisViewModel
-import com.tech.myapplication.presenter.MyPresenter
-import com.tech.myapplication.presenter.MyView
-import com.tech.myapplication.presenter.ProductViewModel
-import com.tech.myapplication.repository.MyRepository
+import com.tech.myapplication.presenter.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), MyView {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+    @Inject lateinit var controller: MyControllerDecorator
+    @Inject lateinit var viewModel: MyViewModel
 
-    private val controller = MyControllerDecorator(MyController( MyInteractor(MyRepository(), MyPresenter(this,this)) ))
+    private val chuckNorrisObserver =
+        Observer<ChuckNorrisViewModel> { data ->  textView1.text = data.value }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("gatien","coucou")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel.liveData.observe(this, chuckNorrisObserver)
         controller.onCreate()
-    }
-
-    override fun display(viewModel: ChuckNorrisViewModel) {
-        Log.i("Pbancarel", viewModel.toString())
-        textView1.text = viewModel.value
     }
 }
