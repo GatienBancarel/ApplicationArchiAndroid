@@ -2,6 +2,7 @@ package com.tech.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.*
 import com.tech.myapplication.controller.MyControllerDecorator
 import com.tech.myapplication.presenter.*
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModel.liveData.observe(this, chuckNorrisObserver)
+    }
+
+    fun getJoke (view: View) {
         controller.onCreate()
     }
 }
