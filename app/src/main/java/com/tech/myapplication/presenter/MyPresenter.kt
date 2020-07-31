@@ -1,6 +1,7 @@
 package com.tech.myapplication.presenter
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,10 @@ class MyPresenter @Inject constructor(
     fun present(joke: ChuckNorris) {
         val chuckNorrisViewModel = ChuckNorrisViewModel(joke.value)
         viewModel.liveData.postValue(chuckNorrisViewModel)
+    }
+
+    fun presentError(){
+        Log.i("PBA", "Erreur réseau")
     }
 }
 

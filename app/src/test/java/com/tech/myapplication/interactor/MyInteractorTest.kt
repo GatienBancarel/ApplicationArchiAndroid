@@ -4,6 +4,8 @@ import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.then
 import com.tech.myapplication.controller.MyController
 import com.tech.myapplication.presenter.MyPresenter
+import com.tech.myapplication.repository.CannotDecodeJsonException
+import com.tech.myapplication.repository.ErrorStatusException
 import com.tech.myapplication.repository.MyRepository
 import org.junit.Test
 
@@ -35,5 +37,25 @@ class MyInteractorTest {
         interactor.getJoke()
         // THEN
         then(presenter).should().present(joke)
+    }
+
+    @Test
+    fun getJoke_WhenCannotDecodeJsonException() {
+        // GIVEN
+        given(repository.getJoke()).willThrow(CannotDecodeJsonException("reason"))
+        // WHEN
+        interactor.getJoke()
+        // THEN
+        then(presenter).should().presentError()
+    }
+
+    @Test
+    fun getJoke_WhenErrorStatusException() {
+        // GIVEN
+        given(repository.getJoke()).willThrow(ErrorStatusException())
+        // WHEN
+        interactor.getJoke()
+        // THEN
+        then(presenter).should().presentError()
     }
 }

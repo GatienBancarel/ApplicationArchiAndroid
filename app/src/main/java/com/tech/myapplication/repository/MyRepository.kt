@@ -1,14 +1,18 @@
 package com.tech.myapplication.repository
 
 import com.tech.myapplication.interactor.ChuckNorris
-import java.lang.Exception
 import javax.inject.Inject
+import kotlin.Exception
 
 class MyRepository @Inject constructor(
     var service: ChuckNorrisService,
     var parser: ChuckNorrisParser
 ) {
 
+    @Throws(
+        ErrorStatusException::class,
+        CannotDecodeJsonException::class
+    )
     fun getJoke() : ChuckNorris {
         val response = service.get("https://api.chucknorris.io/jokes/random")
 
