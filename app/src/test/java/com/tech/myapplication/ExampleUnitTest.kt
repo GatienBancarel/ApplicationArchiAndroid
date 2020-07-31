@@ -1,4 +1,4 @@
-package com.example.applicationarchiandoid
+package com.tech.myapplication
 
 import org.junit.Test
 
